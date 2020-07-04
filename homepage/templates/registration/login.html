@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+{% block body %}
+
+    <div class="container" id="form_login">
+        <h2>Login page</h2>
+        <br>
+        {% if request.user.is_authenticated %}
+            <div class="alert alert-info" role="alert"> Login successfully.</div>
+            <h4>Welcome " {{ user }} "</h4><br>
+            <a class="btn btn-danger" href="/logout">Logout</a>
+        {% else %}
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-outline-success">Login</button>
+            </form>
+            <br>
+            <div class="alert alert-secondary" role="alert">Don't have account? <a href="/register">Create one</a></div>
+
+        {% endif %}
+    </div>
+
+{% endblock %}
